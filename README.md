@@ -1,2 +1,2 @@
 # vue-admin-server
-vue admin server mysql +    express
+vue admin server mysql + express
