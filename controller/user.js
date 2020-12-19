@@ -51,15 +51,15 @@ class usersController {
     const { identity } = vertoken.getToken(req.headers.authorization.split(" ").pop())
     let userList = null
     if (identity != 99) {
-      userList = await usersModel.findAll({ raw: true, attributes: { exclude: ['password', 'token'] }, where: { identity: { [Op.ne]: 99 } } })
+      userList = await usersModel.findAll({ raw: true, include: [rolesModel], attributes: { exclude: ['password', 'token'] }, where: { identity: { [Op.ne]: 99 } } })
     } else {
-      userList = await usersModel.findAll({ raw: true, attributes: { exclude: ['password', 'token'] } })
+      userList = await usersModel.findAll({ raw: true, include: [rolesModel], attributes: { exclude: ['password', 'token'] } })
     }
-    await Promise.all(userList.map(async (item, index) => {
-      const result = await rolesModel.findOne({ where: { id: item.roleId }, attributes: ['title'] })
-      if (result) userList[index].role_name = result.title
-    }))
-
+    userList.map((item, index) => Object.keys(item).forEach(() => userList[index].role_name = item['rolesModel.title']))
+    // await Promise.all(userList.map(async (item, index) => {
+    //   const result = await rolesModel.findOne({ where: { id: item.roleId }, attributes: ['title'] })
+    //   if (result) userList[index].role_name = result.title
+    // }))
     res.json({ code: 200, data: userList, message: 'success' })
   }
   async add(req, res, next) {

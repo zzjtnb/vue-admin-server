@@ -18,9 +18,9 @@ const menusModel = MenusModel(sequelize);
  * 建立模型之间的关系
  */
 // rolesModel.hasMany(usersModel, { foreignKey: 'role_id', targetKey: 'id' });
-// userModule.hasOne(rolesModel, { foreignKey: 'id', sourceKey: 'role_id' })
-// usersModel.belongsTo(rolesModel, { targetKey: 'id', foreignKey: 'roleId' });
 // rolesModel.belongsTo(menusModel, { targetKey: 'id', foreignKey: 'roleId' });
+// userModule.hasOne(rolesModel, { foreignKey: 'id', sourceKey: 'role_id' })
+usersModel.belongsTo(rolesModel, { targetKey: 'id', foreignKey: 'roleId' });
 
 /**
  * 测试连接,同步数据

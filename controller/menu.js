@@ -11,7 +11,7 @@ class rolesController {
     rolesModel.update({ rules: rules + ',' + created.id }, { where: { id: 1 } })
   }
   async delete(req, res, next) {
-    if (req.params.id >= 1 && req.params.id <= 15) return res.json({ code: -1, message: '预留菜单禁止删除' })
+    if (req.params.id >= 1 && req.params.id <= 19) return res.json({ code: -1, message: '预留菜单禁止删除' })
     const result = await menusModel.destroy({ 'where': { 'id': req.params.id } })
     if (!result) return res.json({ code: 404, message: '删除失败' })
     res.json({ code: 200, data: 'success' });
