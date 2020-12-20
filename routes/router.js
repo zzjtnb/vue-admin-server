@@ -9,7 +9,12 @@ const auth = require('../middleware/auth')
 const user = require('../controller/user')
 const role = require('../controller/role');
 const menu = require('../controller/menu');
-
+const { str2null } = require('../utils/str2null')
+// 没有挂载路径的中间件，通过该路由的每个请求都会执行该中间件
+router.use(function (req, res, next) {
+  if (req.body) req.body = str2null(req.body)
+  next();
+})
 //登录
 router.post('/user/login', user.login);
 router.post('/user/register', user.register);
@@ -19,7 +24,7 @@ router.get('/user/list', auth.loginRequired, user.list);
 router.post('/user/add', auth.loginRequired, user.add);
 router.put('/user/update/:id', auth.loginRequired, user.update);
 router.delete('/user/delete/:id', auth.loginRequired, user.delete);
-//路由管理
+//权限管理
 router.post('/role/add', auth.loginRequired, role.add);
 router.delete('/role/delete/:id', auth.loginRequired, role.delete);
 router.put('/role/edit/:id', auth.loginRequired, role.edit);

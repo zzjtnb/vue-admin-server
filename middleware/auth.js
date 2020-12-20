@@ -6,7 +6,7 @@ class authMiddleware {
   async loginRequired(req, res, next) {
     if (!req.headers.authorization) return res.json({ code: -1, message: "token不存在" });
     const token = req.headers.authorization.split(" ").pop()
-    if (!await vertoken.verify(token)) return res.json({ code: -1, message: "token已过期" });
+    if (!await vertoken.verify(token)) return res.status(505).json({ code: 505, message: "token已过期" });
     const { loginname } = vertoken.getToken(token)
     const model = await usersModel.findOne({ where: { loginname: loginname }, attributes: ['token'] })
     if (!model) return res.json({ code: 404, message: '该用户不存在' })

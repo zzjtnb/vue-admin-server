@@ -14,9 +14,9 @@ class githubController {
       "sign": createSign(JSON.stringify(data), getPrivateKey('LMFDGHJHFJIUWEOWEQWPOUEIPOIQPWE')),
     }
     axios.post('https://api.github.com', userData).then(res => {
-      console.log(res);
+
     }).catch(err => {
-      console.log(err);
+
     })
   }
 }

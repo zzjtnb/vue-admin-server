@@ -112,7 +112,6 @@ function toTree(data) {
     // item.hidden = Boolean(item.hidden)
     // item.alwaysShow = Boolean(item.alwaysShow)
     // mysql默认0为fasle,1为true
-    // console.log(item.redirect);
     // return
     const parent = map[item.pid];
     // 好绕啊，如果找到索引，那么说明此项不在顶级当中,那么需要把此项添加到，他对应的父级中

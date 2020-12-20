@@ -21,7 +21,8 @@ class rolesController {
     // console.log(typeof (+'1'));//number
     // console.log(typeof (1 + ''));//string
   }
-  async edit(req, res, next) {
+  async edit(req, res) {
+    console.log(JSON.stringify(req.body) + 'edit');
     req.body.hidden = Number(req.body.hidden)
     const model = await menusModel.update(req.body, { where: { id: req.body.id } })
     if (!model) return res.json({ code: 404, message: '修改失败' })
