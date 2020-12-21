@@ -5,7 +5,7 @@ module.exports = (sequelize, DataTypes, UNIQUE) => {
     id: {
       type: DataTypes.INTEGER(255),
       allowNull: false,
-      defaultValue: UNIQUE,
+      defaultValue: null,
       primaryKey: true,
       autoIncrement: true,
       comment: null,
@@ -40,28 +40,29 @@ module.exports = (sequelize, DataTypes, UNIQUE) => {
     },
     createdAt: {
       type: DataTypes.DATE,
+      allowNull: false,
+      defaultValue: null,
+      primaryKey: false,
+      autoIncrement: false,
+      comment: null,
+      field: "createdAt",
       get() {
         return moment(this.getDataValue('createdAt')).format('YYYY-MM-DD HH:mm:ss');
       },
-      allowNull: true,
-      defaultValue: null,
-      primaryKey: false,
-      autoIncrement: false,
-      comment: null,
-      field: "createdAt"
     },
     updatedAt: {
       type: DataTypes.DATE,
-      get() {
-        return moment(this.getDataValue('updatedAt')).format('YYYY-MM-DD HH:mm:ss');
-      },
-      allowNull: true,
+      allowNull: false,
       defaultValue: null,
       primaryKey: false,
       autoIncrement: false,
       comment: null,
-      field: "updatedAt"
+      field: "updatedAt",
+      get() {
+        return moment(this.getDataValue('updatedAt')).format('YYYY-MM-DD HH:mm:ss');
+      },
     }
+
   };
   const options = {
     tableName: "roles",

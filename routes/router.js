@@ -9,6 +9,7 @@ const auth = require('../middleware/auth')
 const user = require('../controller/user')
 const role = require('../controller/role');
 const menu = require('../controller/menu');
+
 const { str2null } = require('../utils/str2null')
 // 没有挂载路径的中间件，通过该路由的每个请求都会执行该中间件
 router.use(function (req, res, next) {

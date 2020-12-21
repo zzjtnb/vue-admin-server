@@ -1,6 +1,7 @@
 const { sequelize } = require('.//index');
-
-sequelize.sync({ alter: true }).then((res, err) => {
+// const options = { force: true }
+const options = { alter: true }
+sequelize.sync(options).then((res, err) => {
     console.log("所有模型均已成功同步.");
     process.exit();
 });

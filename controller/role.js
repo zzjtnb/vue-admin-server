@@ -36,7 +36,6 @@ class rolesController {
     } else {
       roleList = await rolesModel.findAll()
     }
-    console.log(roleList);
     res.json({ code: 200, data: roleList, message: 'success' });
   }
   async getAllRouter(req, res, next) {
@@ -63,7 +62,6 @@ class rolesController {
     // }))
     // res.json({ code: 200, message: '获取路由成功' });
     const menu = await menusModel.findAll({ raw: true, where: { id: { [Op.in]: model.rules.split(',') } } })
-    console.log(menu);
     res.json({ code: 200, data: toTree(menu), message: 'success' });
   }
 }

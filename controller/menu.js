@@ -31,7 +31,9 @@ class rolesController {
   /**获取动态路由 */
   async getMenuList(req, res, next) {
     let pid = req.query.pid
-    const menu = await menusModel.findAll()
+    const menu = await menusModel.findAll({
+      raw: true,
+    })
     let arr = GetParentArry(pid, menu)
     arr.forEach(item => {
       if (GetParentArry(item.id, menu).length > 0) {
