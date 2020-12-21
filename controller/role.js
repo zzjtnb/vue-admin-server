@@ -61,7 +61,9 @@ class rolesController {
     //   return dataValues
     // }))
     // res.json({ code: 200, message: '获取路由成功' });
-    const menu = await menusModel.findAll({ raw: true, where: { id: { [Op.in]: model.rules.split(',') } } })
+    const menu = await menusModel.findAll({
+      raw: true, order: [['sort', 'ASC']], where: { id: { [Op.in]: model.rules.split(',') } }
+    })
     res.json({ code: 200, data: toTree(menu), message: 'success' });
   }
 }

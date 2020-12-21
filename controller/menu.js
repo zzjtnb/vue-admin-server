@@ -33,6 +33,7 @@ class rolesController {
     let pid = req.query.pid
     const menu = await menusModel.findAll({
       raw: true,
+      order: [['sort', 'ASC']]
     })
     let arr = GetParentArry(pid, menu)
     arr.forEach(item => {
