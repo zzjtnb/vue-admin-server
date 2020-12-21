@@ -1,6 +1,8 @@
 const md5 = require('blueimp-md5')
 const vertoken = require('../utils/token')
-const { usersModel, rolesModel, Op } = require('../models/index');
+const { usersModel, rolesModel, Op } = require('../models');
+usersModel.belongsTo(rolesModel, { targetKey: 'id', foreignKey: 'roleId' });
+
 /** 登录注册相关 */
 class usersController {
   /**注册用户 */
@@ -76,16 +78,11 @@ class usersController {
     // res.json({ code: 200, message: 'success' })
   }
   async update(req, res, next) {
-    const project = await usersModel.findOne({ where: { loginname: req.body.loginname } });
-    if (project === null) {
-      console.log(project instanceof Project); // true
-      console.log(project.loginname); // 'My Title'
-      res.json({ code: 404, message: '存在同名账户' })
-    } else {
-      const model = await usersModel.update(req.body, { where: { id: req.body.id } })
-      if (!model) return res.json({ code: 404, message: '修改失败' })
-      res.json({ code: 200, data: 'success' });
-    }
+    const user = await usersModel.findOne({ raw: true, mwhere: { loginname: req.body.loginname } });
+    if (!user) return res.json({ code: 404, message: '存在同名账户' })
+    const model = await usersModel.update(req.body, { where: { id: req.body.id } })
+    if (!model) return res.json({ code: 404, message: '修改失败' })
+    res.json({ code: 200, data: 'success' });
 
 
   }

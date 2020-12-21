@@ -10,7 +10,7 @@ const db = {
     database: 'vuerole',
     timezone: '+08:00',
     define: {
-      timestamps: false, // create_time && update_time
+      timestamps: true, // create_time && update_time
       pool: {
         max: 5,
         min: 0,

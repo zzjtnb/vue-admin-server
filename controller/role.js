@@ -1,6 +1,5 @@
 const vertoken = require('../utils/token')
-const { rolesModel, menusModel } = require('../models/index');
-const { Op } = require('../config/sequelize')
+const { rolesModel, menusModel, Op } = require('../models');
 class rolesController {
   async add(req, res, next) {
     if (!req.body.title || !req.body.roleType) return res.json({ code: -1, message: "参数不正确" });
@@ -33,10 +32,11 @@ class rolesController {
     const { identity } = vertoken.getToken(req.headers.authorization.split(" ").pop())
     let roleList = null
     if (identity != 99) {
-      roleList = await rolesModel.findAll({ raw: true, attributes: { exclude: ['roleType'] }, where: { id: { [Op.ne]: 1 } } })
+      roleList = await rolesModel.findAll({ attributes: { exclude: ['roleType'] }, where: { id: { [Op.ne]: 1 } } })
     } else {
-      roleList = await rolesModel.findAll({ raw: true })
+      roleList = await rolesModel.findAll()
     }
+    console.log(roleList);
     res.json({ code: 200, data: roleList, message: 'success' });
   }
   async getAllRouter(req, res, next) {
@@ -45,17 +45,17 @@ class rolesController {
     if (!rules) return res.json({ code: 404, message: '该用户没有权限' })
     let menu = null
     if (identity != 99) {
-      menu = await menusModel.findAll({ raw: true, where: { id: { [Op.in]: rules.split(',') } } })
+      menu = await menusModel.findAll({ where: { id: { [Op.in]: rules.split(',') } } })
       res.json({ code: 200, data: allToTree(menu), message: 'success' });
     } else {
-      menu = await menusModel.findAll({ raw: true })
+      menu = await menusModel.findAll()
       res.json({ code: 200, data: allToTree(menu), message: "success" })
     }
   }
   /**获取动态路由 */
   async getMoveRouter(req, res, next) {
     const { roleId } = vertoken.getToken(req.headers.authorization.split(" ").pop())
-    const model = await rolesModel.findOne({ raw: true, where: { roleType: roleId }, attributes: ['rules'] })
+    const model = await rolesModel.findOne({ where: { id: roleId }, attributes: ['rules'] })
     if (!model) return res.json({ code: 404, message: '该用户没有权限' })
     // const menu = await Promise.all(rules.split(',').map(async (item) => {
     //   const { dataValues } = await menusModel.findOne({ where: { id: item } })
@@ -63,6 +63,7 @@ class rolesController {
     // }))
     // res.json({ code: 200, message: '获取路由成功' });
     const menu = await menusModel.findAll({ raw: true, where: { id: { [Op.in]: model.rules.split(',') } } })
+    console.log(menu);
     res.json({ code: 200, data: toTree(menu), message: 'success' });
   }
 }

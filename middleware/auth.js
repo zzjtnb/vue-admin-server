@@ -1,6 +1,6 @@
 const md5 = require('blueimp-md5')
 const vertoken = require('../utils/token')
-const { usersModel } = require('../models/index');
+const { usersModel } = require('../models');
 class authMiddleware {
   /** 需要用户登录*/
   async loginRequired(req, res, next) {

@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "nodemon ./bin/www",
-    "automate": "sequelize-automate -c config/automate.js"
+    "automate": "sequelize-automate -c config/automate.js",
+    "dbsync": "node ./models/dbsync.js"
   },
   "dependencies": {
     "axios": "^0.21.0",
@@ -16,6 +17,7 @@
     "jade": "~1.11.0",
     "jsonwebtoken": "^8.5.1",
     "log4js": "^6.3.0",
+    "moment": "^2.29.1",
     "mysql2": "^2.2.5",
     "nodemon": "^2.0.6",
     "qs": "^6.5.2",

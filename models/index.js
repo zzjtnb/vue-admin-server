@@ -1,43 +1,25 @@
-'use strict';
-const { sequelize, Sequelize, Op } = require('../config/sequelize')
-
+const fs = require('fs');
+const path = require('path');
+const basename = path.basename(__filename);
+const modelsPath = path.join(__dirname, 'common')
+const db = {};
 /**
- * 引入模型
+ * 连接到数据库
  */
-const UsersModel = require('./common/users');
-const RolesModel = require('./common/roles');
-const MenusModel = require('./common/menus');
-/**
- * 实例化模型
- */
-const usersModel = UsersModel(sequelize);
-const rolesModel = RolesModel(sequelize);
-const menusModel = MenusModel(sequelize);
+const { Sequelize, DataTypes, Op } = require('sequelize');
+const dbConfig = require('../config/db')
+const sequelize = new Sequelize(dbConfig.dev);
 
-/**
- * 建立模型之间的关系
- */
-// rolesModel.hasMany(usersModel, { foreignKey: 'role_id', targetKey: 'id' });
-// rolesModel.belongsTo(menusModel, { targetKey: 'id', foreignKey: 'roleId' });
-// userModule.hasOne(rolesModel, { foreignKey: 'id', sourceKey: 'role_id' })
-usersModel.belongsTo(rolesModel, { targetKey: 'id', foreignKey: 'roleId' });
+fs.readdirSync(modelsPath)
+  .filter(file => {
+    return (file.indexOf('.') !== 0) && (file !== basename) && (file.slice(-3) === '.js');
+  })
+  .forEach(file => {
+    const model = require(path.join(modelsPath, file))(sequelize, DataTypes)
+    db[model.name] = model;
+  });
 
-/**
- * 测试连接,同步数据
- */
-// sequelize.authenticate()
-//   .then(() => {
-//     // console.log('MySql Connection has been established successfully.');
-//     // sequelize.sync({ force: true });
-//     sequelize.sync();
-//     // console.log("所有模型均已成功同步.");
-//   })
-//   .catch(err => {
-//     console.log('Unable to connect to the database:', err);
-//   });
-
-module.exports = {
-  usersModel, menusModel, rolesModel, Sequelize, sequelize, Op
-};
-
-// mysql默认0为fasle,1为true
+db.sequelize = sequelize;
+db.Sequelize = Sequelize;
+db.Op = Op
+module.exports = db;

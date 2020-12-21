@@ -1,21 +1,19 @@
 module.exports = {
   dbOptions: {
-    "dialect": "mysql",
-    'host': 'localhost',
-    'port': 3306,
-    'username': 'root',
-    'password': 'root',
-    'database': 'vuerole',
+    dialect: "mysql",
+    host: 'localhost',
+    port: 3306,
+    username: 'root',
+    password: 'root',
+    database: 'vuerole',
     logging: false,
     define: {
-      freezeTableName: false,//使用数据库里的真实表面
-      underscored: false,// 字段以下划线_来分割(默认是驼峰命名风格)
       charset: 'utf8mb4',
       timezone: '+08:00',
       dialectOptions: {
         collate: 'utf8mb4_general_ci',
       },
-      timestamps: false,
+      timestamps: true,
     },
   },
 

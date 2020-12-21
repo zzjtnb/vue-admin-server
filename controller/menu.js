@@ -1,4 +1,4 @@
-const { menusModel, rolesModel } = require('../models/index');
+const { menusModel, rolesModel } = require('../models');
 
 class rolesController {
   async add(req, res, next) {
@@ -22,7 +22,6 @@ class rolesController {
     // console.log(typeof (1 + ''));//string
   }
   async edit(req, res) {
-    console.log(JSON.stringify(req.body) + 'edit');
     req.body.hidden = Number(req.body.hidden)
     const model = await menusModel.update(req.body, { where: { id: req.body.id } })
     if (!model) return res.json({ code: 404, message: '修改失败' })
@@ -32,7 +31,7 @@ class rolesController {
   /**获取动态路由 */
   async getMenuList(req, res, next) {
     let pid = req.query.pid
-    const menu = await menusModel.findAll({ raw: true })
+    const menu = await menusModel.findAll()
     let arr = GetParentArry(pid, menu)
     arr.forEach(item => {
       if (GetParentArry(item.id, menu).length > 0) {

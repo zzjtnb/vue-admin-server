@@ -1,8 +1,6 @@
-const {
-  DataTypes, UNIQUE
-} = require('sequelize');
-
-module.exports = sequelize => {
+'use strict';
+const moment = require('moment');
+module.exports = (sequelize, DataTypes, UNIQUE) => {
   const attributes = {
     id: {
       type: DataTypes.INTEGER(255),
@@ -66,6 +64,30 @@ module.exports = sequelize => {
       autoIncrement: false,
       comment: "登录token",
       field: "token"
+    },
+    createdAt: {
+      type: DataTypes.DATE,
+      get() {
+        return moment(this.getDataValue('createdAt')).format('YYYY-MM-DD HH:mm:ss');
+      },
+      allowNull: true,
+      defaultValue: null,
+      primaryKey: false,
+      autoIncrement: false,
+      comment: null,
+      field: "createdAt"
+    },
+    updatedAt: {
+      type: DataTypes.DATE,
+      get() {
+        return moment(this.getDataValue('updatedAt')).format('YYYY-MM-DD HH:mm:ss');
+      },
+      allowNull: true,
+      defaultValue: null,
+      primaryKey: false,
+      autoIncrement: false,
+      comment: null,
+      field: "updatedAt"
     }
   };
   const options = {

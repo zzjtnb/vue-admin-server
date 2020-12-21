@@ -2,7 +2,7 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 
-const config = require('./config/config');
+const config = require('./config/settings');
 const { appLog, httpLogger, httpErrorLogger } = require('./middleware/logger');
 const router = require('./routes/router');
 
@@ -40,7 +40,6 @@ app.use(function (req, res, next) {
 
 // error handle
 app.use((err, req, res, next) => {
-  console.log("错误");
   httpErrorLogger.error("Something went wrong:", err.message, err);
   if (req.xhr) {
     return res.json({
