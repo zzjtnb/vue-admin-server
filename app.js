@@ -1,6 +1,5 @@
 const express = require('express');
 const path = require('path');
-const cookieParser = require('cookie-parser');
 
 const config = require('./config/settings');
 const { appLog, httpLogger, httpErrorLogger } = require('./middleware/logger');
@@ -8,16 +7,11 @@ const router = require('./routes/router');
 
 const app = express();
 
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
-
 // Request logger
 app.use(httpLogger)
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 //设置跨域访问
