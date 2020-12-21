@@ -55,14 +55,14 @@ class rolesController {
   /**获取动态路由 */
   async getMoveRouter(req, res, next) {
     const { roleId } = vertoken.getToken(req.headers.authorization.split(" ").pop())
-    const { rules } = await rolesModel.findOne({ where: { roleType: roleId }, attributes: ['rules'] })
-    if (!rules) return res.json({ code: 404, message: '该用户没有权限' })
+    const model = await rolesModel.findOne({ raw: true, where: { roleType: roleId }, attributes: ['rules'] })
+    if (!model) return res.json({ code: 404, message: '该用户没有权限' })
     // const menu = await Promise.all(rules.split(',').map(async (item) => {
     //   const { dataValues } = await menusModel.findOne({ where: { id: item } })
     //   return dataValues
     // }))
     // res.json({ code: 200, message: '获取路由成功' });
-    const menu = await menusModel.findAll({ raw: true, where: { id: { [Op.in]: rules.split(',') } } })
+    const menu = await menusModel.findAll({ raw: true, where: { id: { [Op.in]: model.rules.split(',') } } })
     res.json({ code: 200, data: toTree(menu), message: 'success' });
   }
 }

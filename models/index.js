@@ -25,16 +25,16 @@ usersModel.belongsTo(rolesModel, { targetKey: 'id', foreignKey: 'roleId' });
 /**
  * 测试连接,同步数据
  */
-sequelize.authenticate()
-  .then(() => {
-    // console.log('MySql Connection has been established successfully.');
-    // sequelize.sync({ force: true });
-    sequelize.sync();
-    // console.log("所有模型均已成功同步.");
-  })
-  .catch(err => {
-    console.log('Unable to connect to the database:', err);
-  });
+// sequelize.authenticate()
+//   .then(() => {
+//     // console.log('MySql Connection has been established successfully.');
+//     // sequelize.sync({ force: true });
+//     sequelize.sync();
+//     // console.log("所有模型均已成功同步.");
+//   })
+//   .catch(err => {
+//     console.log('Unable to connect to the database:', err);
+//   });
 
 module.exports = {
   usersModel, menusModel, rolesModel, Sequelize, sequelize, Op

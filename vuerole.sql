@@ -2,16 +2,16 @@
  Navicat Premium Data Transfer
 
  Source Server         : 本地
- Source Server Type    : MySQL
- Source Server Version : 50728
+ Source Server Type    : MariaDB
+ Source Server Version : 100505
  Source Host           : localhost:3306
  Source Schema         : vuerole
 
- Target Server Type    : MySQL
- Target Server Version : 50728
+ Target Server Type    : MariaDB
+ Target Server Version : 100505
  File Encoding         : 65001
 
- Date: 20/12/2020 18:18:16
+ Date: 21/12/2020 09:07:42
 */
 
 SET NAMES utf8mb4;
@@ -24,15 +24,15 @@ DROP TABLE IF EXISTS `menus`;
 CREATE TABLE `menus`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `type` int(11) NULL DEFAULT NULL COMMENT '类型 1:目录 2:菜单 3 按钮',
-  `icon` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '图标',
-  `title` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '标题',
-  `path` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '路由地址',
-  `component` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '组件路径',
-  `name` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '组件名称',
-  `permissions` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '组件参数',
+  `icon` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '图标',
+  `title` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '标题',
+  `path` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '路由地址',
+  `component` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '组件路径',
+  `name` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '组件名称',
+  `permissions` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '组件参数',
   `sort` int(11) NULL DEFAULT NULL COMMENT '排序',
   `pid` int(11) NULL DEFAULT NULL COMMENT '上级类目-对应menus.id',
-  `redirect` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '重定向地址，在面包屑中点击会重定向去的地址',
+  `redirect` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '重定向地址，在面包屑中点击会重定向去的地址',
   `hidden` int(1) NULL DEFAULT 0 COMMENT '侧边栏显示',
   `alwaysShow` int(1) NULL DEFAULT 0 COMMENT '路由下面的 children 声明的路由大于1个时，自动会变成嵌套的模式',
   `breadcrumb` int(1) NULL DEFAULT 1 COMMENT ' 如果设置为false，则不会在breadcrumb面包屑中显示(默认 true)',
@@ -72,7 +72,7 @@ CREATE TABLE `roles`  (
   `id` int(255) NOT NULL AUTO_INCREMENT,
   `title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '规则名称',
   `roleType` int(255) NULL DEFAULT 1 COMMENT '角色类型 1 超级管理员 2 普通会员',
-  `rules` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '权限 ，对应menus.id 逗号隔开的字符串',
+  `rules` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '权限 ，对应menus.id 逗号隔开的字符串',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
@@ -94,7 +94,7 @@ CREATE TABLE `users`  (
   `nickname` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '昵称',
   `roleId` int(11) NULL DEFAULT 1 COMMENT '权限ID-对应roles.id',
   `identity` int(255) NULL DEFAULT 0 COMMENT '角色类型 99 超级管理员  0普通用户',
-  `token` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '登录token',
+  `token` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '登录token',
   PRIMARY KEY (`id`, `loginname`) USING BTREE,
   INDEX `roleId`(`roleId`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
@@ -102,8 +102,8 @@ CREATE TABLE `users`  (
 -- ----------------------------
 -- Records of users
 -- ----------------------------
-INSERT INTO `users` VALUES (1, 'SuperAdmin', '670b14728ad9902aecba32e22fa4f6bd', '超级管理员', NULL, 99, '819ac44f05c5e5bb1d56bc3b73765990');
-INSERT INTO `users` VALUES (2, 'admin', '670b14728ad9902aecba32e22fa4f6bd', NULL, NULL, 0, '5dbce2848dc9f753698a14eb4a011c23');
-INSERT INTO `users` VALUES (3, 'test', '670b14728ad9902aecba32e22fa4f6bd', NULL, NULL, 0, NULL);
+INSERT INTO `users` VALUES (1, 'SuperAdmin', '670b14728ad9902aecba32e22fa4f6bd', '超级管理员', 1, 99, 'e86c8a4382b90447ac96ac6569f426b6');
+INSERT INTO `users` VALUES (2, 'admin', '670b14728ad9902aecba32e22fa4f6bd', NULL, 2, 0, '5dbce2848dc9f753698a14eb4a011c23');
+INSERT INTO `users` VALUES (3, 'test', '670b14728ad9902aecba32e22fa4f6bd', NULL, 3, 0, NULL);
 
 SET FOREIGN_KEY_CHECKS = 1;
