@@ -5,7 +5,7 @@ module.exports = (sequelize, DataTypes, UNIQUE) => {
     id: {
       type: DataTypes.INTEGER(255),
       allowNull: false,
-      defaultValue: null,
+      defaultValue: DataTypes.UNIQUE,
       primaryKey: true,
       autoIncrement: true,
       comment: null,
@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes, UNIQUE) => {
     loginname: {
       type: DataTypes.STRING(255),
       allowNull: false,
-      defaultValue: null,
+      defaultValue: DataTypes.UNIQUE,
       primaryKey: true,
       autoIncrement: false,
       comment: "登录名称",
@@ -23,7 +23,7 @@ module.exports = (sequelize, DataTypes, UNIQUE) => {
     password: {
       type: DataTypes.STRING(255),
       allowNull: false,
-      defaultValue: null,
+      defaultValue: DataTypes.UNIQUE,
       primaryKey: false,
       autoIncrement: false,
       comment: "密码",

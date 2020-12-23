@@ -5,7 +5,7 @@ module.exports = (sequelize, DataTypes, UNIQUE) => {
     id: {
       type: DataTypes.INTEGER(255),
       allowNull: false,
-      defaultValue: null,
+      defaultValue: DataTypes.UNIQUE,
       primaryKey: true,
       autoIncrement: true,
       comment: null,
@@ -62,7 +62,6 @@ module.exports = (sequelize, DataTypes, UNIQUE) => {
         return moment(this.getDataValue('updatedAt')).format('YYYY-MM-DD HH:mm:ss');
       },
     }
-
   };
   const options = {
     tableName: "roles",

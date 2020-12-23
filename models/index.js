@@ -6,6 +6,7 @@ const db = {};
 /**
  * 连接到数据库
  */
+// mysql默认0为fasle,1为true
 const { Sequelize, DataTypes, Op } = require('sequelize');
 const dbConfig = require('../config/db')
 const sequelize = new Sequelize(dbConfig.dev);

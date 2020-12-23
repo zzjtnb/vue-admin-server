@@ -107,13 +107,12 @@ function toTree(data) {
     // 以当前遍历项，的pid,去map对象中找到索引的id
     item.meta = {
       title: item.title,
-      icon: item.icon,
-      breadcrumb: Boolean(item.breadcrumb) //  如果设置为false，则不会在breadcrumb面包屑中显示(默认 true)
+      icon: item.icon,//图标
+      noCache: item.noCache, // 不会被 <keep-alive> 缓存,
+      breadcrumb: Boolean(item.breadcrumb),//breadcrumb面包屑中显示隐藏
+      affix: item.affix, //它则会固定在tags-view
+      activeMenu: item.activeMenu, //侧边栏高亮列表的路由
     }
-    // item.hidden = Boolean(item.hidden)
-    // item.alwaysShow = Boolean(item.alwaysShow)
-    // mysql默认0为fasle,1为true
-    // return
     const parent = map[item.pid];
     // 好绕啊，如果找到索引，那么说明此项不在顶级当中,那么需要把此项添加到，他对应的父级中
     if (parent) {

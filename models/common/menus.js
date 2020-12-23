@@ -1,11 +1,11 @@
 'use strict';
 const moment = require('moment');
-module.exports = (sequelize, DataTypes, UNIQUE) => {
+module.exports = (sequelize, DataTypes) => {
   const attributes = {
     id: {
-      type: DataTypes.INTEGER(11),
+      type: DataTypes.INTEGER(11).UNSIGNED,
       allowNull: false,
-      defaultValue: null,
+      defaultValue: DataTypes.UNIQUE,
       primaryKey: true,
       autoIncrement: true,
       comment: null,
@@ -62,7 +62,7 @@ module.exports = (sequelize, DataTypes, UNIQUE) => {
       defaultValue: null,
       primaryKey: false,
       autoIncrement: false,
-      comment: "组件名称",
+      comment: "设定路由的名字，一定要填写不然使用<keep-alive>时会出现各种问题",
       field: "name"
     },
     permissions: {
@@ -102,31 +102,58 @@ module.exports = (sequelize, DataTypes, UNIQUE) => {
       field: "redirect"
     },
     hidden: {
-      type: DataTypes.INTEGER(1),
+      type: DataTypes.BOOLEAN,
       allowNull: true,
-      defaultValue: "0",
+      defaultValue: false,
       primaryKey: false,
       autoIncrement: false,
-      comment: "侧边栏显示",
+      comment: "当设置 true 的时候该路由不会在侧边栏出现(默认 false)",
       field: "hidden"
     },
     alwaysShow: {
-      type: DataTypes.INTEGER(1),
+      type: DataTypes.BOOLEAN,
       allowNull: true,
-      defaultValue: "0",
+      defaultValue: true,
       primaryKey: false,
       autoIncrement: false,
       comment: "路由下面的 children 声明的路由大于1个时，自动会变成嵌套的模式",
       field: "alwaysShow"
     },
     breadcrumb: {
-      type: DataTypes.INTEGER(1),
+      type: DataTypes.BOOLEAN,
       allowNull: true,
-      defaultValue: "1",
+      defaultValue: true,
       primaryKey: false,
       autoIncrement: false,
       comment: " 如果设置为false，则不会在breadcrumb面包屑中显示(默认 true)",
       field: "breadcrumb"
+    },
+    noCache: {
+      type: DataTypes.BOOLEAN,
+      allowNull: true,
+      defaultValue: false,
+      primaryKey: false,
+      autoIncrement: false,
+      comment: "如果设置为true，则不会被 <keep-alive> 缓存(默认 false)",
+      field: "noCache"
+    },
+    affix: {
+      type: DataTypes.BOOLEAN,
+      allowNull: true,
+      defaultValue: false,
+      primaryKey: false,
+      autoIncrement: false,
+      comment: "如果设置为true，它则会固定在tags-view中(默认 false)",
+      field: "affix"
+    },
+    activeMenu: {
+      type: DataTypes.STRING(255),
+      allowNull: true,
+      defaultValue: null,
+      primaryKey: false,
+      autoIncrement: false,
+      comment: "高亮相对应的侧边栏",
+      field: "activeMenu"
     },
     createdAt: {
       type: DataTypes.DATE,
@@ -152,7 +179,6 @@ module.exports = (sequelize, DataTypes, UNIQUE) => {
         return moment(this.getDataValue('updatedAt')).format('YYYY-MM-DD HH:mm:ss');
       },
     }
-
   };
   const options = {
     tableName: "menus",
