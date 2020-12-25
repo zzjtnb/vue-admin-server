@@ -11,7 +11,7 @@
  Target Server Version : 50728
  File Encoding         : 65001
 
- Date: 23/12/2020 18:08:23
+ Date: 25/12/2020 11:18:43
 */
 
 SET NAMES utf8mb4;
@@ -42,29 +42,29 @@ CREATE TABLE `menus`  (
   `createdAt` datetime(0) NULL DEFAULT NULL,
   `updatedAt` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 23 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 23 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of menus
 -- ----------------------------
 INSERT INTO `menus` VALUES (1, 1, 'el-icon-s-home', '首页', '/', 'Layout', 'home', NULL, 1, 0, '/home', 0, 0, 1, 0, 0, NULL, '2020-12-31 00:00:00', '2020-12-21 13:24:41');
-INSERT INTO `menus` VALUES (2, 2, NULL, '首页', 'home', 'home/index', NULL, NULL, 0, 1, NULL, 0, 0, 0, 0, 0, NULL, '2020-12-31 00:00:00', '2020-12-21 15:19:05');
-INSERT INTO `menus` VALUES (3, 1, 'el-icon-setting', '系统管理', '/system', 'Layout', NULL, NULL, 2, 0, '/system/menu', 0, 0, 1, 0, 0, NULL, '2020-12-31 00:00:00', '2020-12-21 15:19:26');
-INSERT INTO `menus` VALUES (4, 2, 'el-icon-s-order', '菜单管理', '/system/menu', 'system/menu/index', NULL, NULL, 1, 3, NULL, 0, 0, 1, 0, 0, NULL, '2020-12-31 00:00:00', '2020-12-21 15:19:36');
-INSERT INTO `menus` VALUES (5, 3, NULL, '新增菜单', NULL, NULL, NULL, 'add', 1, 4, NULL, 0, 0, 1, 0, 0, NULL, '2020-12-31 00:00:00', '2020-12-21 15:21:36');
-INSERT INTO `menus` VALUES (6, 3, NULL, '删除菜单', NULL, NULL, NULL, 'delete', 2, 4, NULL, 0, 0, 1, 0, 0, NULL, '2020-12-31 00:00:00', '2020-12-21 15:21:44');
-INSERT INTO `menus` VALUES (7, 3, NULL, '编辑菜单', NULL, NULL, NULL, 'edit', 3, 4, NULL, 0, 0, 1, 0, 0, NULL, '2020-12-31 00:00:00', '2020-12-21 15:21:50');
-INSERT INTO `menus` VALUES (8, 2, 'el-icon-s-custom', '用户管理', '/system/users', 'system/users/index', 'user', NULL, 2, 3, NULL, 0, 0, 1, 0, 0, NULL, '2020-12-31 00:00:00', '2020-12-21 15:19:43');
-INSERT INTO `menus` VALUES (9, 3, NULL, '新增用户', NULL, NULL, NULL, 'add', 1, 8, NULL, 0, 0, 1, 0, 0, NULL, '2020-12-31 00:00:00', '2020-12-21 15:22:10');
-INSERT INTO `menus` VALUES (10, 3, NULL, '删除用户', NULL, NULL, NULL, 'delete', 2, 8, NULL, 0, 0, 1, 0, 0, NULL, '2020-12-31 00:00:00', '2020-12-21 15:22:17');
-INSERT INTO `menus` VALUES (11, 3, NULL, '编辑用户', NULL, NULL, NULL, 'edit', 3, 8, NULL, 0, 0, 1, 0, 0, NULL, '2020-12-31 00:00:00', '2020-12-21 15:22:23');
-INSERT INTO `menus` VALUES (12, 2, 'el-icon-s-flag', '权限管理', '/system/roles', 'system/roles/index', 'roles', NULL, 3, 3, NULL, 0, 0, 1, 0, 0, NULL, '2020-12-31 00:00:00', '2020-12-21 15:19:48');
-INSERT INTO `menus` VALUES (13, 3, NULL, '新增权限', NULL, NULL, NULL, 'add', 1, 12, NULL, 0, 0, 1, 0, 0, NULL, '2020-12-31 00:00:00', '2020-12-21 15:22:38');
+INSERT INTO `menus` VALUES (2, 2, NULL, '首页', 'home', 'home/index', NULL, NULL, 1, 1, NULL, 0, 0, 0, 0, 0, NULL, '2020-12-31 00:00:00', '2020-12-24 19:52:21');
+INSERT INTO `menus` VALUES (3, 1, 'el-icon-setting', '系统管理', '/system', 'Layout', NULL, NULL, 3, 0, '/system/menu', 0, 0, 1, 0, 0, NULL, '2020-12-31 00:00:00', '2020-12-21 15:19:26');
+INSERT INTO `menus` VALUES (4, 2, 'el-icon-s-order', '菜单管理', '/system/menu', 'system/menu/index', NULL, NULL, 1, 3, NULL, 0, 0, 1, 0, 0, NULL, '2020-12-31 00:00:00', '2020-12-24 19:52:32');
+INSERT INTO `menus` VALUES (5, 3, NULL, '新增菜单', NULL, NULL, NULL, 'add', 1, 4, NULL, 0, 0, 1, 0, 0, NULL, '2020-12-31 00:00:00', '2020-12-24 19:52:51');
+INSERT INTO `menus` VALUES (6, 3, NULL, '删除菜单', NULL, NULL, NULL, 'delete', 2, 4, NULL, 0, 0, 1, 0, 0, NULL, '2020-12-31 00:00:00', '2020-12-24 19:52:56');
+INSERT INTO `menus` VALUES (7, 3, NULL, '编辑菜单', NULL, NULL, NULL, 'edit', 3, 4, NULL, 0, 0, 1, 0, 0, NULL, '2020-12-31 00:00:00', '2020-12-24 19:53:00');
+INSERT INTO `menus` VALUES (8, 2, 'el-icon-s-custom', '用户管理', '/system/users', 'system/users/index', 'user', NULL, 2, 3, NULL, 0, 0, 1, 0, 0, NULL, '2020-12-31 00:00:00', '2020-12-24 19:52:37');
+INSERT INTO `menus` VALUES (9, 3, NULL, '新增用户', NULL, NULL, NULL, 'add', 1, 8, NULL, 0, 0, 1, 0, 0, NULL, '2020-12-31 00:00:00', '2020-12-24 19:53:06');
+INSERT INTO `menus` VALUES (10, 3, NULL, '删除用户', NULL, NULL, NULL, 'delete', 2, 8, NULL, 0, 0, 1, 0, 0, NULL, '2020-12-31 00:00:00', '2020-12-24 19:53:13');
+INSERT INTO `menus` VALUES (11, 3, NULL, '编辑用户', NULL, NULL, NULL, 'edit', 3, 8, NULL, 0, 0, 1, 0, 0, NULL, '2020-12-31 00:00:00', '2020-12-24 19:53:18');
+INSERT INTO `menus` VALUES (12, 2, 'el-icon-s-flag', '权限管理', '/system/roles', 'system/roles/index', 'roles', NULL, 3, 3, NULL, 0, 0, 1, 0, 0, NULL, '2020-12-31 00:00:00', '2020-12-24 19:52:45');
+INSERT INTO `menus` VALUES (13, 3, NULL, '新增权限', NULL, NULL, NULL, 'add', 4, 12, NULL, 0, 0, 1, 0, 0, NULL, '2020-12-31 00:00:00', '2020-12-24 19:51:44');
 INSERT INTO `menus` VALUES (14, 3, NULL, '删除权限', NULL, NULL, NULL, 'delete', 2, 12, NULL, 0, 0, 1, 0, 0, NULL, '2020-12-31 00:00:00', '2020-12-21 15:22:43');
 INSERT INTO `menus` VALUES (15, 3, NULL, '编辑权限', NULL, NULL, NULL, 'edit', 3, 12, NULL, 0, 0, 1, 0, 0, NULL, '2020-12-31 00:00:00', '2020-12-21 15:22:50');
 INSERT INTO `menus` VALUES (16, 3, NULL, '用户授权', NULL, NULL, NULL, 'authorize', 1, 12, NULL, 0, 0, 1, 0, 0, NULL, '2020-12-31 00:00:00', '2020-12-21 15:22:50');
 INSERT INTO `menus` VALUES (17, 1, 'fa fa-github-square', '测试', '/test', 'Layout', 'test', NULL, 3, 0, '/test', 0, 0, 1, 0, 0, NULL, '2020-12-31 00:00:00', '2020-12-21 15:20:21');
-INSERT INTO `menus` VALUES (18, 2, 'fa fa-plane', '测试', 'index', 'test/index', NULL, NULL, 0, 17, NULL, 0, 0, 1, 0, 0, NULL, '2020-12-31 00:00:00', '2020-12-21 15:22:50');
+INSERT INTO `menus` VALUES (18, 2, 'fa fa-plane', '测试', 'index', 'test/index', NULL, NULL, 1, 17, NULL, 0, 0, 1, 0, 0, NULL, '2020-12-31 00:00:00', '2020-12-24 19:53:37');
 INSERT INTO `menus` VALUES (19, 1, 'fa fa-cloud', '争逐', 'https://zzjtnb.com', 'Layout', NULL, NULL, 4, 0, NULL, 0, 0, 1, 0, 0, NULL, '2020-12-31 00:00:00', '2020-12-21 15:20:29');
 INSERT INTO `menus` VALUES (20, 1, 'fa fa-chrome', '内嵌网页', '/embed/:id?', 'Layout', 'embed', NULL, 5, 0, NULL, 0, 0, 1, 0, 0, NULL, '2020-12-31 00:00:00', '2020-12-23 17:54:21');
 INSERT INTO `menus` VALUES (21, 2, 'fa fa-video-camera', '争逐', '/embed/1', 'embed/index', NULL, NULL, 1, 20, 'https://zzjtnb.com/', 0, 0, 1, 0, 0, NULL, '2020-12-31 00:00:00', '2020-12-23 17:54:45');
@@ -87,7 +87,7 @@ CREATE TABLE `roles`  (
 -- ----------------------------
 -- Records of roles
 -- ----------------------------
-INSERT INTO `roles` VALUES (1, '超级管理员', 1, '1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22', '2020-12-31 00:00:00', '2020-12-23 12:41:46');
+INSERT INTO `roles` VALUES (1, '超级管理员', 1, '1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22', '2020-12-31 00:00:00', '2020-12-24 19:51:21');
 INSERT INTO `roles` VALUES (2, '管理员', 2, '1,2,5,9,13,17,18,19,3,4,8,12', '2020-12-31 00:00:00', '2020-12-21 13:00:03');
 INSERT INTO `roles` VALUES (3, '默认', 3, '1,2,17,18,19', '2020-12-31 00:00:00', '2020-12-21 12:46:21');
 
@@ -111,8 +111,8 @@ CREATE TABLE `users`  (
 -- ----------------------------
 -- Records of users
 -- ----------------------------
-INSERT INTO `users` VALUES (1, 'SuperAdmin', '670b14728ad9902aecba32e22fa4f6bd', '超级管理员', 1, 99, 'a40cb663f4b300dbd8d36402fb91b846', '2020-12-31 00:00:00', '2020-12-23 17:49:27');
-INSERT INTO `users` VALUES (2, 'admin', '670b14728ad9902aecba32e22fa4f6bd', NULL, 2, 0, '5dbce2848dc9f753698a14eb4a011c23', '2020-12-31 00:00:00', '2020-12-21 12:59:17');
+INSERT INTO `users` VALUES (1, 'SuperAdmin', '670b14728ad9902aecba32e22fa4f6bd', '超级管理员', 1, 99, '5f81fbd45378a28bca0398bf8af54eae', '2020-12-31 00:00:00', '2020-12-25 11:17:57');
+INSERT INTO `users` VALUES (2, 'admin', '670b14728ad9902aecba32e22fa4f6bd', NULL, 2, 0, 'b75a070786ac9d8a4f3c5e6321094077', '2020-12-31 00:00:00', '2020-12-25 11:17:42');
 INSERT INTO `users` VALUES (3, 'test', '670b14728ad9902aecba32e22fa4f6bd', NULL, 3, 0, NULL, '2020-12-31 00:00:00', '2020-12-21 12:54:29');
 
 SET FOREIGN_KEY_CHECKS = 1;

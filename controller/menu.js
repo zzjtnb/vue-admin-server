@@ -1,4 +1,4 @@
-const { menusModel, rolesModel } = require('../models');
+const { menusModel, rolesModel, Op } = require('../models');
 
 class rolesController {
   async add(req, res, next) {
@@ -11,8 +11,9 @@ class rolesController {
     rolesModel.update({ rules: rules + ',' + created.id }, { where: { id: 1 } })
   }
   async delete(req, res, next) {
-    if (req.params.id >= 1 && req.params.id <= 19) return res.json({ code: -1, message: '预留菜单禁止删除' })
-    const result = await menusModel.destroy({ 'where': { 'id': req.params.id } })
+    const menu = await menusModel.findAll({ raw: true, })
+    if (req.params.id >= 1 && req.params.id <= 21) return res.json({ code: -1, message: '预留菜单禁止删除' })
+    const result = await menusModel.destroy({ 'where': { id: GetParentPidArry(req.params.id, menu) } })
     if (!result) return res.json({ code: 404, message: '删除失败' })
     res.json({ code: 200, data: 'success' });
     const { rules } = await rolesModel.findOne({ where: { id: 1 }, attributes: ['rules'] })
@@ -28,7 +29,6 @@ class rolesController {
     res.json({ code: 200, data: 'success' });
   }
 
-  /**获取动态路由 */
   async getMenuList(req, res, next) {
     let pid = req.query.pid
     const menu = await menusModel.findAll({
@@ -57,5 +57,17 @@ function GetParentArry(id, arry) {
   }
   return newArry;
 }
-
+function GetParentPidArry(id, array) {
+  var newArry = []
+  function get(id, array) {
+    newArry.push(Number(id))
+    array.forEach(item => {
+      if (item.pid == id) {
+        get(item.id, array)
+      }
+    });
+  }
+  get(id, array)
+  return newArry
+}
 module.exports = new rolesController();
