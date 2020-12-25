@@ -157,7 +157,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     createdAt: {
       type: DataTypes.DATE,
-      allowNull: false,
+      allowNull: true,
       defaultValue: DataTypes.NOW, // 这样,当前日期/时间将用于填充此列(在插入时)
       primaryKey: false,
       autoIncrement: false,
@@ -169,7 +169,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     updatedAt: {
       type: DataTypes.DATE,
-      allowNull: false,
+      allowNull: true,
       defaultValue: DataTypes.NOW, // 这样,当前日期/时间将用于填充此列(在插入时)
       primaryKey: false,
       autoIncrement: false,
