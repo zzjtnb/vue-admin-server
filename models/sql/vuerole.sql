@@ -11,7 +11,7 @@
  Target Server Version : 50728
  File Encoding         : 65001
 
- Date: 25/12/2020 11:18:43
+ Date: 25/12/2020 15:05:10
 */
 
 SET NAMES utf8mb4;
@@ -111,8 +111,8 @@ CREATE TABLE `users`  (
 -- ----------------------------
 -- Records of users
 -- ----------------------------
-INSERT INTO `users` VALUES (1, 'SuperAdmin', '670b14728ad9902aecba32e22fa4f6bd', '超级管理员', 1, 99, '5f81fbd45378a28bca0398bf8af54eae', '2020-12-31 00:00:00', '2020-12-25 11:17:57');
+INSERT INTO `users` VALUES (1, 'SuperAdmin', '670b14728ad9902aecba32e22fa4f6bd', '超级管理员', 1, 99, 'ec293b40520093445b9271a0b9a8b349', '2020-12-31 00:00:00', '2020-12-25 14:58:12');
 INSERT INTO `users` VALUES (2, 'admin', '670b14728ad9902aecba32e22fa4f6bd', NULL, 2, 0, 'b75a070786ac9d8a4f3c5e6321094077', '2020-12-31 00:00:00', '2020-12-25 11:17:42');
-INSERT INTO `users` VALUES (3, 'test', '670b14728ad9902aecba32e22fa4f6bd', NULL, 3, 0, NULL, '2020-12-31 00:00:00', '2020-12-21 12:54:29');
+INSERT INTO `users` VALUES (3, 'test', '670b14728ad9902aecba32e22fa4f6bd', NULL, 3, 0, '7b0477d0a80c836db676c6afcadf7f86', '2020-12-31 00:00:00', '2020-12-21 12:54:29');
 
 SET FOREIGN_KEY_CHECKS = 1;

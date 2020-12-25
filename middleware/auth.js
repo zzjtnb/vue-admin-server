@@ -10,7 +10,7 @@ class authMiddleware {
     const { loginname } = vertoken.getToken(token)
     const model = await usersModel.findOne({ where: { loginname: loginname }, attributes: ['token'] })
     if (!model) return res.json({ code: 404, message: '该用户不存在' })
-    if (md5(token) !== model.dataValues.token) return res.json({ code: 404, message: 'token与当前用户不符,请重新登陆' })
+    if (md5(token) !== model.dataValues.token) return res.status(401).json({ code: 401, message: 'token与当前用户不符,请重新登陆' })
     next();
   }
   /** 用户鉴权*/
