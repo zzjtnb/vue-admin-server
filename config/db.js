@@ -1,6 +1,6 @@
-const { sql } = require('../middleware/logger')
+const { sqlLog } = require('../middleware/logger')
 
-const db = {
+const dbOptions = {
   dev: {
     dialect: "mysql",
     host: 'localhost',
@@ -19,7 +19,7 @@ const db = {
       },
     },
     //如果选择log.logger.info,会有Cannot read property 'isLevelEnabled' of null的异常。
-    logging: sql,
+    logging: sqlLog,
   }
 };
-module.exports = db
+module.exports = dbOptions

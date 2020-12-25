@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "nodemon ./bin/www",
-    "automate": "sequelize-automate -c config/automate.js",
-    "dbsync": "node ./models/dbsync.js"
+    "automate": "node config/automate.js",
+    "dbsync": "node models/dbsync.js"
   },
   "dependencies": {
     "axios": "^0.21.0",
