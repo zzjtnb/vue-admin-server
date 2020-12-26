@@ -9,6 +9,7 @@ const auth = require('./middleware/auth')
 const user = require('./controller/system/user')
 const role = require('./controller/system/role');
 const menu = require('./controller/system/menu');
+const whitelist = require('./controller/system/whitelist');
 
 const { str2null } = require('./utils/str2null')
 // 没有挂载路径的中间件，通过该路由的每个请求都会执行该中间件
@@ -17,7 +18,7 @@ router.use(function (req, res, next) {
   next();
 })
 //登录
-router.post('/user/login', user.login);
+router.post('/user/login', auth.loginRequired, user.login);
 router.post('/user/register', user.register);
 router.post('/user/detail', auth.loginRequired, user.detail);
 router.post('/user/logout', user.logout);
@@ -38,5 +39,10 @@ router.post('/menu/add', auth.loginRequired, menu.add);
 router.delete('/menu/delete/:id', auth.loginRequired, menu.delete);
 router.put('/menu/update/:id', auth.loginRequired, menu.edit);
 router.get('/menu/getMenuList', auth.loginRequired, menu.getMenuList);
+//白名单
+router.get('/whitelist/list', auth.loginRequired, whitelist.list);
+router.delete('/whitelist/delete', auth.loginRequired, whitelist.delete);
+router.post('/whitelist/add', auth.loginRequired, whitelist.add);
+router.put('/whitelist/update/:id', auth.loginRequired, whitelist.edit);
 
 module.exports = router; //导出

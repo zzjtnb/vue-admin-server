@@ -14,6 +14,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
+// app.set('trust proxy', function (ip) {
+//   if (ip === '127.0.0.1') return true // trusted IPs
+//   else return false
+// })
 //设置跨域访问
 app.all('*', function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");

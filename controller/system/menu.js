@@ -12,7 +12,7 @@ class rolesController {
   }
   async delete(req, res, next) {
     const menu = await menusModel.findAll({ raw: true, })
-    if (req.params.id >= 1 && req.params.id <= 21) return res.json({ code: -1, message: '预留菜单禁止删除' })
+    // if (req.params.id >= 1 && req.params.id <= 21) return res.json({ code: -1, message: '预留菜单禁止删除' })
     const result = await menusModel.destroy({ 'where': { id: GetParentPidArry(req.params.id, menu) } })
     if (!result) return res.json({ code: 404, message: '删除失败' })
     res.json({ code: 200, data: 'success' });
