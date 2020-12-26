@@ -3,7 +3,7 @@ const path = require('path');
 
 const config = require('./config/settings');
 const { appLog, httpLogger, httpErrorLogger } = require('./middleware/logger');
-const router = require('./routes/router');
+const router = require('./router');
 
 const app = express();
 

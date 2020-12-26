@@ -53,7 +53,7 @@ const getPrivateKey = function (key) {
   for (var i = 0; i < key.length; i += 64) { arr.push(key.substring(i, i + 64)) }
   let endStr = arr.pop()
   let pend = endStr.length % 4
-  pend = pend > 2 ? 4 : pend
+  pend = pend > 2 ? 4 - pend : pend
   arr.push(endStr += '='.repeat(pend))
   return '-----BEGIN PRIVATE KEY-----\n' + arr.join('\n') + '\n-----END PRIVATE KEY-----';
 };
