@@ -40,11 +40,40 @@ function createSign(data, privateKey) {
  * @param {string} publicKey
  * @returns {string}
  */
+
 function publicEncrypt(data, publicKey) {
-  var bufferToEncrypt = Buffer.from(data);
-  var encrypted = crypto.publicEncrypt({ "key": publicKey, padding: crypto.constants.RSA_PKCS1_PADDING }, bufferToEncrypt).toString("base64")
-  return encrypted
+  const MAX_ENCRYPT_BLOCK = 117;
+  //得到公钥
+  // var publicPem = fs.readFileSync(path.join(__dirname, "../../properties/rsa_public_key.pem"));//替换你自己的路径
+  // var publicKey = publicPem.toString();
+  var bufferToEncrypt = Buffer.from(data, 'utf8'); //加密信息用bufferToEncrypt封装
+  var inputLen = bufferToEncrypt.byteLength;
+  var bufs = []; //密文
+  var offSet = 0;  //开始长度
+  var endOffSet = MAX_ENCRYPT_BLOCK;  //结束长度
+  //分段加密
+  while (inputLen - offSet > 0) {
+    if (inputLen - offSet > MAX_ENCRYPT_BLOCK) {
+      var bufTmp = bufferToEncrypt.slice(offSet, endOffSet);
+      bufs.push(crypto.publicEncrypt({ key: publicKey, padding: crypto.constants.RSA_PKCS1_PADDING }, bufTmp));
+    } else {
+      var bufTmp = bufferToEncrypt.slice(offSet, inputLen);
+      bufs.push(crypto.publicEncrypt({ key: publicKey, padding: crypto.constants.RSA_PKCS1_PADDING }, bufTmp));
+    }
+    offSet += MAX_ENCRYPT_BLOCK;
+    endOffSet += MAX_ENCRYPT_BLOCK;
+  }
+  const result = Buffer.concat(bufs);
+  const base64Str = result.toString("base64");  //密文BASE64编码
+  return base64Str;
 }
+
+// 下面这种报错 Error: error:0406D06E:rsa routines:RSA_padding_add_PKCS1_type_2:data too large for key size
+// function publicEncrypt(data, publicKey) {
+//   var bufferToEncrypt = Buffer.from(data);
+//   var encrypted = crypto.publicEncrypt({ "key": publicKey, padding: crypto.constants.RSA_PKCS1_PADDING }, bufferToEncrypt).toString("base64")
+//   return encrypted
+// }
 module.exports = {
   createSign, publicEncrypt
 };
